@@ -1,0 +1,364 @@
+import {
+  CustomerProfile,
+  RentalAgreement,
+  BillingSummary,
+  ReservationQuote,
+  LeadHistoryItem,
+  CaseDetails,
+  RoadsideAssistanceRequest,
+  ActivityGroup,
+} from '../types/crm.types';
+
+export const mockCustomer: CustomerProfile = {
+  id: 'CUST-0078432',
+  name: 'Ahmed Khalid',
+  avatarInitials: 'AK',
+  isVerified: true,
+  mobile: '+971 50 *** 1234',
+  email: 'ahmed.khalid@***.com',
+  preferredLanguage: 'Arabic',
+  idLicenseStatus: 'Verified',
+  activeRentalNo: 'RA-20418',
+  previousRentalNo: 'RA-20301 (Closed)',
+  openTicketsCount: 2,
+};
+
+export const mockActiveRental: RentalAgreement = {
+  agreementNo: 'RA-20418',
+  status: 'Active',
+  vehicle: {
+    model: 'Nissan Sunny',
+    group: 'Group B',
+    category: 'Economy • Nissan Sunny or similar',
+    image: '/assets/nissan-sunny.png',
+    plateNo: 'DXB-32849',
+    seats: 5,
+    bags: 2,
+    transmission: 'Automatic',
+  },
+  pickupDate: '06 Oct 2026',
+  pickupTime: '10:00',
+  pickupLocation: 'Dubai Airport (DXB) Terminal 1',
+  returnDate: '05 Nov 2026',
+  returnTime: '10:00',
+  returnLocation: 'Dubai Airport (DXB) Terminal 1',
+  rentalPeriodDays: 30,
+  depositAmount: 1500,
+  depositStatus: 'Authorized',
+  rentalCharges: 1750,
+  extras: 200,
+  totalCharges: 1950,
+  estimatedCharges: 1950,
+};
+
+export const mockPreviousRental: RentalAgreement = {
+  agreementNo: 'RA-20301',
+  status: 'Returned',
+  vehicle: {
+    model: 'Nissan Sunny',
+    group: 'Group B',
+    category: 'Economy • Nissan Sunny or similar',
+    image: '/assets/nissan-sunny.png',
+    plateNo: 'DXB-88219',
+    seats: 5,
+    bags: 2,
+    transmission: 'Automatic',
+  },
+  pickupDate: '05 Sep 2026',
+  pickupTime: '10:00',
+  pickupLocation: 'Dubai Airport (DXB) Terminal 1',
+  returnDate: '05 Oct 2026',
+  returnTime: '14:20',
+  returnLocation: 'Dubai Airport (DXB) Terminal 1',
+  rentalPeriodDays: 30,
+  depositAmount: 1000,
+  depositStatus: 'Refunded (Processing)',
+  totalCharges: 1860,
+  relatedCaseId: 'FIN-10482',
+};
+
+export const mockBillingSummary: BillingSummary = {
+  agreementNo: 'RA-20301',
+  securityDeposit: 1500,
+  refundStatus: 'Pending Finance',
+  refundStatusSubtext: 'Pending approval / confirmation',
+  invoiceNo: 'INV-20301',
+  invoiceTotal: 1260,
+  amountPaid: 1260,
+  balance: 0,
+  isPaid: true,
+  chargeBreakdown: [
+    { item: 'Rental Charges (5 days)', amount: 1000 },
+    { item: 'Salik Charges', amount: 40 },
+    { item: 'Traffic Fines', amount: 100 },
+    { item: 'Administration Fee', amount: 60 },
+    { item: 'VAT (5%)', amount: 60 },
+  ],
+  vatAmount: 60,
+  totalInclVat: 1260,
+  fines: {
+    amount: 100,
+    evidenceFile: 'fine_evidence.pdf',
+    status: 'Under Dispute',
+  },
+  salik: {
+    amount: 40,
+    evidenceFile: 'salik_statement.pdf',
+    status: 'Accepted',
+  },
+  transactions: [
+    {
+      date: '29 Sep 2026',
+      refNo: 'PAY-884521',
+      type: 'Payment (Credit Card)',
+      amount: 1260,
+      status: 'Completed',
+      details: 'Visa •••• 4587',
+    },
+    {
+      date: '05 Oct 2026',
+      refNo: 'RF-10482',
+      type: 'Refund (Deposit)',
+      amount: 1500,
+      status: 'Pending Approval',
+      details: 'Awaiting Finance confirmation',
+    },
+  ],
+};
+
+export const mockReservationQuote: ReservationQuote = {
+  quoteNo: 'RES-56792',
+  source: 'Direct',
+  status: 'Quote',
+  pickupLocation: 'Dubai Airport (DXB) Terminal 1',
+  pickupDate: '10 Oct 2026',
+  pickupTime: '10:00',
+  returnLocation: 'Dubai Airport (DXB) Terminal 1',
+  returnDate: '13 Oct 2026',
+  returnTime: '10:00',
+  rentalType: 'Daily',
+  rentalDays: 3,
+  vehicleGroup: 'Group B | Sedan',
+  vehicleSubtitle: 'Nissan Sunny or similar',
+  availabilityStatus: 'To confirm',
+  vehicle: {
+    model: 'Nissan Sunny',
+    group: 'Group B | Sedan',
+    seats: 5,
+    bags: 2,
+    transmission: 'Automatic',
+    image: '/assets/nissan-sunny.png',
+  },
+  quoteBreakdown: {
+    rentalCharges: 360,
+    vatAmount: 18,
+    totalAmount: 378,
+  },
+  refundableDeposit: 1500,
+  requiredDocuments: ['Valid UAE Driving Licence', 'Emirates ID or Passport'],
+  eligibilityCheck: 'Pending',
+};
+
+export const mockLeadHistory: LeadHistoryItem[] = [
+  {
+    reference: 'RES-55411',
+    pickupDate: '01 Sep 2026',
+    returnDate: '03 Sep 2026',
+    vehicleGroup: 'Group B | Sedan',
+    branch: 'DXB T1',
+    status: 'Confirmed',
+    assignedOwner: 'Omar Hassan',
+  },
+  {
+    reference: 'RES-55102',
+    pickupDate: '15 Aug 2026',
+    returnDate: '17 Aug 2026',
+    vehicleGroup: 'Group B | Sedan',
+    branch: 'DXB T1',
+    status: 'Quoted',
+    assignedOwner: 'Fatima Ali',
+  },
+];
+
+export const mockCaseDetails: CaseDetails = {
+  ticketNo: 'FIN-10482',
+  title: 'Complaint: Delayed Deposit Refund',
+  status: 'Pending',
+  relatedRentalNo: 'RA-20301',
+  relatedRentalSubtitle: 'Nissan Sunny • Returned 05 Oct 2026',
+  createdOn: '05 Oct 2026 14:28',
+  latestUpdate: '08 Oct 2026 10:16',
+  ownerDepartment: 'Finance',
+  ownerName: 'Sara Nasser (Finance Officer)',
+  priority: 'Normal',
+  classification: 'Complaint',
+  department: 'Finance',
+  category: 'Refunds',
+  subcategory: 'Deposit Refund',
+  branch: 'Dubai Airport (DXB) Terminal 1',
+  channel: 'Phone',
+  slaDue: 'Configured Policy',
+  slaStatusText: 'Pending setup',
+  nextAction: 'Confirm refund status',
+  callbackTime: 'Today 16:00',
+  thread: [
+    {
+      id: 'msg-1',
+      author: 'Sara Nasser',
+      role: 'Finance Officer',
+      timestamp: '08 Oct 2026 10:12',
+      isInternal: true,
+      content:
+        'Hi Finance Team,\nCustomer is checking the status of deposit refund for RA-20301 (returned 05 Oct).\nCould you please confirm the current processing status and expected timeline?\nCustomer is awaiting an update. Thank you.',
+      avatarInitials: 'SN',
+      avatarBg: 'bg-slate-400',
+    },
+    {
+      id: 'msg-2',
+      author: 'Finance Team',
+      role: 'Finance',
+      timestamp: '08 Oct 2026 10:16',
+      isInternal: true,
+      content:
+        'Checking refund processing status. Will update once we have confirmation from accounts.',
+      avatarInitials: 'FM',
+      avatarBg: 'bg-indigo-500',
+    },
+  ],
+  relatedTickets: [
+    {
+      ticketNo: 'OPS-99831',
+      subject: 'Vehicle check after return',
+      created: '03 Oct 2026',
+      closed: '04 Oct 2026',
+      status: 'Resolved',
+    },
+  ],
+};
+
+export const mockRoadsideAssistance: RoadsideAssistanceRequest = {
+  requestNo: 'RSA-10510',
+  isPriority: true,
+  status: 'Request Logged',
+  currentStepIndex: 0,
+  linkedRentalNo: 'RA-20418',
+  vehicleModel: 'Nissan Sunny',
+  vehicleClass: 'Group B | Sedan',
+  vehicleImage: '/assets/nissan-sunny.png',
+  requestDateTime: '8 Oct 2026, 14:20',
+  reportMethod: 'Reported via Phone',
+  issueCategory: 'Battery',
+  issueSubtext: 'Vehicle not starting',
+  location: 'Oud Metha, Dubai, UAE',
+  callbackNumber: '+971 50 *** 1234 (Masked)',
+  isVehicleDrivable: false,
+  safetyAlertText:
+    'Vehicle not drivable\nSafety assessment completed with customer. Customer is safe at current location.',
+  dispatchDetails: {
+    assignedTeam: 'Operations',
+    serviceProvider: 'Pending confirmation',
+    eta: 'Awaiting confirmation',
+  },
+  latestUpdate: {
+    timestamp: '8 Oct 2026, 14:20',
+    summary:
+      'Roadside assistance request logged. Vehicle not starting (battery issue). Location confirmed with customer. Safety assessment completed.',
+    updatedBy: 'Omar Hassan (Operations)',
+  },
+  relatedServices: {
+    maintenance: {
+      status: 'Next appointment: Unconfirmed',
+      actionText: 'Schedule',
+    },
+    replacementVehicle: {
+      status: 'Availability: Awaiting check',
+      actionText: 'Check Availability',
+    },
+    deliveryCollection: {
+      location: 'Location: Oud Metha, Dubai',
+      actionText: 'Update',
+    },
+  },
+};
+
+export const mockActivityTimeline: ActivityGroup[] = [
+  {
+    dateHeader: 'Today — 8 Oct 2026',
+    items: [
+      {
+        id: 'act-1',
+        type: 'call',
+        title: 'Incoming Call',
+        timestamp: '14:22',
+        subtitle: 'Refund follow-up',
+        meta: 'Queue: Arabic CRM | 00:04:18',
+        badge: { text: 'Case: FIN-10482 [Pending]', color: 'amber' },
+      },
+      {
+        id: 'act-2',
+        type: 'email',
+        title: 'Customer Email',
+        timestamp: '10:16',
+        subtitle: 'Deposit refund enquiry',
+        description: 'Asking for refund status.',
+      },
+    ],
+  },
+  {
+    dateHeader: 'Yesterday — 7 Oct 2026',
+    items: [
+      {
+        id: 'act-3',
+        type: 'chat',
+        title: 'Chat Conversation',
+        timestamp: '16:40',
+        description: 'Asked about refund timeline.',
+      },
+    ],
+  },
+  {
+    dateHeader: '6 Oct 2026',
+    items: [
+      {
+        id: 'act-4',
+        type: 'ticket',
+        title: 'Ticket FIN-10482',
+        timestamp: '11:35',
+        subtitle: 'Deposit refund pending',
+        meta: 'Status: Pending | Owner: Finance',
+      },
+    ],
+  },
+  {
+    dateHeader: '5 Oct 2026',
+    items: [
+      {
+        id: 'act-5',
+        type: 'email',
+        title: 'Customer Email',
+        timestamp: '11:03',
+        subtitle: 'Return receipt',
+        description: 'Attached vehicle return receipt.',
+      },
+      {
+        id: 'act-6',
+        type: 'call',
+        title: 'Outgoing Call',
+        timestamp: '09:27',
+        description: 'Confirmed return and next steps.',
+      },
+    ],
+  },
+  {
+    dateHeader: '29 Sep 2026',
+    items: [
+      {
+        id: 'act-7',
+        type: 'call',
+        title: 'Incoming Call',
+        timestamp: '09:15',
+        description: 'Check-in and rental confirmation.',
+      },
+    ],
+  },
+];
