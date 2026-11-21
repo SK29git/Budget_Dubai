@@ -73,7 +73,7 @@ export const BillingPage: React.FC = () => {
     window.addEventListener('billing:show-bookings', handleShowBookings);
     return () => window.removeEventListener('billing:show-bookings', handleShowBookings);
   }, []);
-
+//
   const handleSelectAgreement = async (
     bNo: string,
     custId?: number,
