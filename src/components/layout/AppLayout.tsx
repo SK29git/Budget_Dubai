@@ -6,10 +6,15 @@ import { NavigationTabs } from '../common/NavigationTabs';
 import { SkeletonCard } from '../common/SkeletonCard';
 import { CustomerEditModal } from '../modals/CustomerEditModal';
 import { TransferCallModal } from '../modals/TransferCallModal';
+import { AddPaymentCardModal } from '../modals/AddPaymentCardModal';
+import { CustomerDocumentsDrawer } from '../modals/CustomerDocumentsDrawer';
+import { VehicleFleetPickerModal } from '../modals/VehicleFleetPickerModal';
+import { RentalExtensionModal } from '../modals/RentalExtensionModal';
+import { RentalReturnModal } from '../modals/RentalReturnModal';
 
 export const AppLayout: React.FC = () => {
   return (
-    <div className="h-screen w-screen flex flex-col bg-slate-100 overflow-hidden font-sans select-none">
+    <div className="h-screen w-screen flex flex-col bg-slate-100 overflow-hidden font-sans">
       {/* 1. Top Navigation Bar with Centered Module Tabs */}
       <NavigationTabs />
 
@@ -38,9 +43,14 @@ export const AppLayout: React.FC = () => {
         {/* <CustomerActivitySidebar /> */}
       </div>
 
-      {/* Global Modals */}
+      {/* Global Modals & Drawers */}
       <CustomerEditModal />
       <TransferCallModal />
+      <AddPaymentCardModal />
+      <CustomerDocumentsDrawer />
+      <VehicleFleetPickerModal />
+      <RentalExtensionModal />
+      <RentalReturnModal />
     </div>
   );
 };

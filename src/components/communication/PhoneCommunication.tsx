@@ -8,12 +8,12 @@ interface PhoneCommProps {
 }
 
 export const PhoneCommunication: React.FC<PhoneCommProps> = ({ variant = 'inbound' }) => {
-  const { customer, queueName, ivrPath } = useWorkspace();
+  const { customer, queueName, ivrPath, caseDetails, previousRental, setActiveNavTab } = useWorkspace();
   const navigate = useNavigate();
 
   // Agent Notes state
   const [reason, setReason] = useState(
-    'Customer follow up on deposit refund for RA-20301 (returned 05 Oct).'
+    `Customer follow up on deposit refund for ${previousRental.agreementNo} (returned ${previousRental.returnDate}).`
   );
   const [action, setAction] = useState(
     'Contacted Finance team to check refund processing status. Confirmed under review.'
@@ -25,7 +25,7 @@ export const PhoneCommunication: React.FC<PhoneCommProps> = ({ variant = 'inboun
   const [destQueue, setDestQueue] = useState('Finance');
   const [transferType, setTransferType] = useState<'Warm' | 'Cold'>('Warm');
   const [transferNotes, setTransferNotes] = useState(
-    'Customer following up on deposit refund (FIN-10482) for RA-20301. Please assist.'
+    `Customer following up on deposit refund (${caseDetails.ticketNo}) for ${previousRental.agreementNo}. Please assist.`
   );
   const [isTransferring, setIsTransferring] = useState(false);
 
@@ -178,7 +178,7 @@ export const PhoneCommunication: React.FC<PhoneCommProps> = ({ variant = 'inboun
               Pending
             </span>
             <button
-              onClick={() => navigate('/cases')}
+              onClick={() => setActiveNavTab('cases')}
               className="text-blue-600 hover:text-blue-800 hover:underline flex items-center text-[9px] ml-0.5"
             >
               <span>View</span>
